@@ -20,7 +20,7 @@ import 'package:provider/provider.dart';
 
 class Favorites extends StatefulWidget {
   final bool? fromPlaylist;
-  const Favorites({super.key,this.fromPlaylist});
+  const Favorites({super.key, this.fromPlaylist});
 
   @override
   State<Favorites> createState() => _FavoritesState();
@@ -42,33 +42,32 @@ class _FavoritesState extends State<Favorites> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
             child: Padding(
-          padding:
-              screenPadding(context),
+          padding: screenPadding(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                    children: [
-                      if(widget.fromPlaylist==true)
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          size: mediaqueryHeight(0.028, context),
-                          color: greyColor,
-                        ),
+                children: [
+                  if (widget.fromPlaylist == true)
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: mediaqueryHeight(0.028, context),
+                        color: greyColor,
                       ),
-                       if(widget.fromPlaylist==true)
-                       SizedBox(
-                        width: mediaqueryHeight(0.015, context),
-                      ),
-                      myText("Favorites", mediaqueryHeight(0.030, context), greyColor),
-                    ],
-                  ),
-             
-               SizedBox(
+                    ),
+                  if (widget.fromPlaylist == true)
+                    SizedBox(
+                      width: mediaqueryHeight(0.015, context),
+                    ),
+                  myText(
+                      "Favorites", mediaqueryHeight(0.030, context), greyColor),
+                ],
+              ),
+              SizedBox(
                 height: mediaqueryHeight(0.01, context),
               ),
               Expanded(
@@ -83,7 +82,7 @@ class _FavoritesState extends State<Favorites> {
                           child: Text(
                             "No songs added to favorites",
                             style: TextStyle(
-                              fontFamily:"FiraSans",
+                              fontFamily: "FiraSans",
                               color: greyColor2,
                               fontSize: mediaqueryWidth(0.045, context),
                             ),
@@ -115,8 +114,8 @@ class _FavoritesState extends State<Favorites> {
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 leading: Container(
-                                  height:  mediaqueryWidth(0.14, context),
-                                      width:  mediaqueryWidth(0.16, context),
+                                  height: mediaqueryWidth(0.14, context),
+                                  width: mediaqueryWidth(0.16, context),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(24),
                                     color: const Color.fromARGB(
@@ -125,23 +124,25 @@ class _FavoritesState extends State<Favorites> {
                                   child: QueryArtworkWidget(
                                     id: items.data![index].songid,
                                     type: ArtworkType.AUDIO,
-                                    nullArtworkWidget:  Icon(
+                                    nullArtworkWidget: Icon(
                                       Icons.graphic_eq,
-                                      size:  mediaqueryWidth(0.070, context),
+                                      size: mediaqueryWidth(0.070, context),
                                       color: Colors.white54,
                                     ),
                                   ),
                                 ),
                                 title: myText(
-                                    items.data![index].title,  mediaqueryWidth(0.049, context), Colors.white),
+                                    items.data![index].title,
+                                    mediaqueryWidth(0.049, context),
+                                    Colors.white),
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     GestureDetector(
-                                      child:  Icon(
+                                      child: Icon(
                                         FontAwesomeIcons.solidHeart,
                                         color: Colors.red,
-                                        size: mediaqueryHeight(0.025,context),
+                                        size: mediaqueryHeight(0.025, context),
                                       ),
                                       onTap: () async {
                                         int songId = items.data![index].songid;
@@ -162,15 +163,23 @@ class _FavoritesState extends State<Favorites> {
                                         PopupMenuItem<String>(
                                           value: 'playlist',
                                           child: myText(
-                                              "Add to playlist",   mediaqueryWidth(0.046, context), black),
+                                              "Add to playlist",
+                                              mediaqueryWidth(0.046, context),
+                                              black),
                                         ),
                                         PopupMenuItem<String>(
                                           value: 'share',
-                                          child: myText("Share",   mediaqueryWidth(0.046, context), black),
+                                          child: myText(
+                                              "Share",
+                                              mediaqueryWidth(0.046, context),
+                                              black),
                                         ),
                                         PopupMenuItem(
                                           value: "details",
-                                          child: myText("Details",   mediaqueryWidth(0.046, context), black),
+                                          child: myText(
+                                              "Details",
+                                              mediaqueryWidth(0.046, context),
+                                              black),
                                         )
                                       ],
                                       onSelected: (value) {
@@ -207,7 +216,7 @@ class _FavoritesState extends State<Favorites> {
                                 ),
                                 subtitle: myText(
                                     items.data![index].artist.toString(),
-                                      mediaqueryWidth(0.039, context),
+                                    mediaqueryWidth(0.039, context),
                                     const Color.fromARGB(255, 145, 145, 145)),
                               ),
                               screenDivider(context),

@@ -39,10 +39,7 @@ class _AllSongsState extends State<AllSongs> {
     super.initState();
   }
 
-  bool isListTilePressed = false;
-  String currentSongName = "";
-  String currentArtistName = "";
-
+ 
   double sliderValue = 0.36;
   @override
   Widget build(BuildContext context) {
@@ -148,13 +145,7 @@ class _AllSongsState extends State<AllSongs> {
                                           .then((value) {
                                         setState(() {});
                                       });
-                                      setState(() {
-                                        isListTilePressed = true;
-                                        currentSongName =
-                                            items.data![index].title;
-                                        currentArtistName =
-                                            items.data![index].artist;
-                                      });
+                                      
                                     },
                                     contentPadding: EdgeInsets.zero,
                                     leading: Container(
@@ -266,86 +257,6 @@ class _AllSongsState extends State<AllSongs> {
                     },
                   ),
                 ),
-                if (isListTilePressed == true)
-                  Container(
-                    height:  mediaqueryHeight(0.075, context),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: const Color.fromARGB(255, 22, 43, 59)),
-                    child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal:  mediaqueryHeight(0.015, context)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                  height: mediaqueryHeight(0.3, context),
-                                  width:  mediaqueryHeight(0.056, context),
-                                  child: const Icon(
-                                    Icons.graphic_eq,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                 SizedBox(
-                                  width: mediaqueryHeight(0.025, context),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        myText(
-                                            currentSongName,
-                                            mediaqueryHeight(0.020,context),
-                                            const Color.fromARGB(
-                                                255, 255, 255, 255)),
-                                        myText(
-                                            currentArtistName, mediaqueryHeight(0.015, context), Colors.grey)
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (audioPlayer.playing) {
-                                      audioPlayer.pause();
-                                    } else {
-                                      audioPlayer.play();
-                                    }
-                                  });
-                                },
-                                child: audioPlayer.playing
-                                    ?  FaIcon(
-                                        FontAwesomeIcons.circlePause,
-                                        color:
-                                            const Color.fromARGB(255, 255, 255, 255),
-                                        size: mediaqueryHeight(0.039, context),
-                                      )
-                                    :  FaIcon(
-                                        FontAwesomeIcons.circlePlay,
-                                        color: Colors.white,
-                                        size: mediaqueryHeight(0.039, context),
-                                      )),
-                          ],
-                        )),
-                  ),
-                 SizedBox(
-                  height: mediaqueryHeight(0.005, context),
-                )
               ],
             ),
           ),

@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:lazits/Db_Model/db_model.dart';
 import 'package:lazits/Db_function/db_function.dart';
 import 'package:lazits/Reusable_widgets/add_to_playlist_alert.dart';
@@ -64,7 +65,19 @@ class _MusicPlayerState extends State<MusicPlayer>
     addSongToMostPlayed(widget.songModel![widget.index].songid);
     try {
       await widget.audioPlayer.setAudioSource(
-          AudioSource.uri(Uri.parse(widget.songModel![widget.index].uri)));
+          AudioSource.uri(Uri.parse(widget.songModel![widget.index].uri),
+          tag: MediaItem(
+   
+    id: "${widget.songModel![widget.index].songid}",
+   
+    album: widget.songModel![widget.index].artist,
+    title: widget.songModel![widget.index].title,
+    artUri: Uri.parse('https://example.com/albumart.jpg'),
+  ),
+          
+          ),
+          
+          );
 
       await widget.audioPlayer.seek(Duration.zero);
 

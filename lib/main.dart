@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:lazits/Db_Model/db_model.dart';
 import 'package:lazits/Db_Model/fav_db_model.dart';
 import 'package:lazits/Db_Model/most_played_db_model.dart';
@@ -23,6 +24,11 @@ void main(List<String> args) async {
   Hive.registerAdapter(PlaylistDbModelAdapter());
   Hive.registerAdapter(RecentlyPlayedAdapter());
   Hive.registerAdapter(MostPlayedAdapter());
+   await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
 
 
   runApp(

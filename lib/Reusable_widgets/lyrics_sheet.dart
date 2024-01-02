@@ -31,10 +31,10 @@ Future<String?> getLyrics(String titles, String artists) async {
         }
         return lyrics;
       } else {
-        return 'Lyrics not found for this track';
+        return null;
       }
     } else {
-      return 'Failed to fetch lyrics.Check your network connection.';
+      return null;
     }
   } catch (e) {
     debugPrint('Exception in getLyrics: $e');

@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   checkPermission13() async {
-    final per = await [Permission.audio, Permission.photos].request();
+    final per = await [Permission.audio].request();
     final voicePermission = await Permission.microphone.request();
 
     if (per.values.every((status) =>

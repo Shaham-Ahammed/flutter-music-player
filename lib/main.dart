@@ -47,8 +47,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (ctx) => const SplashScreen(),
-        "bottomNavigation": (context) => const BottomNavigation(),
-      
+        "bottomNavigation": (context) => const BottomNavigation(),     
       },
     );
   }

@@ -142,7 +142,11 @@ class _SearchState extends State<Search> {
                             onRefresh: () async {
                               setState(() {});
                             },
-                            child: ListView.builder(
+                            child:filteredSongs.isEmpty?
+                            Center(child: myText("no songs matches your search",  mediaqueryWidth(0.045, context),greyColor2 ),):
+                            
+                            
+                             ListView.builder(
                               keyboardDismissBehavior:
                                   ScrollViewKeyboardDismissBehavior.onDrag,
                               physics: const BouncingScrollPhysics(),

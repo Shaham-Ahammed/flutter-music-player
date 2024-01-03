@@ -20,6 +20,9 @@ import 'package:lazits/screens/privacy_policy.dart';
 import 'package:lazits/screens/terms_and_conditions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final audioPlayer = AudioPlayer();
 
@@ -39,7 +42,6 @@ class _AllSongsState extends State<AllSongs> {
     super.initState();
   }
 
- 
   double sliderValue = 0.36;
   @override
   Widget build(BuildContext context) {
@@ -49,8 +51,7 @@ class _AllSongsState extends State<AllSongs> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(
-            padding:
-               screenPadding(context),
+            padding: screenPadding(context),
             child: Column(
               children: [
                 Row(
@@ -75,7 +76,7 @@ class _AllSongsState extends State<AllSongs> {
                     )
                   ],
                 ),
-                 SizedBox(
+                SizedBox(
                   height: mediaqueryHeight(0.01, context),
                 ),
                 Column(
@@ -110,9 +111,9 @@ class _AllSongsState extends State<AllSongs> {
                             child: Text(
                               "No Songs Found",
                               style: TextStyle(
-                                fontFamily:"FiraSans",
+                                fontFamily: "FiraSans",
                                 color: greyColor2,
-                                fontSize:  mediaqueryWidth(0.045, context),
+                                fontSize: mediaqueryWidth(0.045, context),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -145,12 +146,11 @@ class _AllSongsState extends State<AllSongs> {
                                           .then((value) {
                                         setState(() {});
                                       });
-                                      
                                     },
                                     contentPadding: EdgeInsets.zero,
                                     leading: Container(
-                                      height:  mediaqueryWidth(0.14, context),
-                                      width:  mediaqueryWidth(0.16, context),
+                                      height: mediaqueryWidth(0.14, context),
+                                      width: mediaqueryWidth(0.16, context),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(24),
                                         color: const Color.fromARGB(
@@ -159,14 +159,16 @@ class _AllSongsState extends State<AllSongs> {
                                       child: QueryArtworkWidget(
                                         id: items.data![index].songid,
                                         type: ArtworkType.AUDIO,
-                                        nullArtworkWidget:  Icon(
+                                        nullArtworkWidget: Icon(
                                           Icons.graphic_eq,
-                                          size:  mediaqueryWidth(0.070, context),
+                                          size: mediaqueryWidth(0.070, context),
                                           color: Colors.white54,
                                         ),
                                       ),
                                     ),
-                                    title: myText(items.data![index].title,  mediaqueryWidth(0.049, context),
+                                    title: myText(
+                                        items.data![index].title,
+                                        mediaqueryWidth(0.049, context),
                                         Colors.white),
                                     trailing: PopupMenuButton<String>(
                                       shape: RoundedRectangleBorder(
@@ -176,25 +178,32 @@ class _AllSongsState extends State<AllSongs> {
                                       itemBuilder: (context) => [
                                         PopupMenuItem<String>(
                                           value: 'playlist',
-                                          child: myText("Add to playlist",  mediaqueryWidth(0.046, context),
+                                          child: myText(
+                                              "Add to playlist",
+                                              mediaqueryWidth(0.046, context),
                                               Colors.black),
                                         ),
                                         PopupMenuItem<String>(
                                           value: 'favorites',
-                                          child: myText("Add to favorites", mediaqueryWidth(0.046, context),
+                                          child: myText(
+                                              "Add to favorites",
+                                              mediaqueryWidth(0.046, context),
                                               Colors.black),
                                         ),
                                         PopupMenuItem<String>(
                                           value: 'share',
-                                          child:
-                                              myText("Share", mediaqueryWidth(0.046, context), Colors.black),
+                                          child: myText(
+                                              "Share",
+                                              mediaqueryWidth(0.046, context),
+                                              Colors.black),
                                         ),
                                         PopupMenuItem(
                                           value: "details",
                                           child: myText(
-                                              "Details", mediaqueryWidth(0.046, context), Colors.black),
+                                              "Details",
+                                              mediaqueryWidth(0.046, context),
+                                              Colors.black),
                                         ),
-                                        
                                       ],
                                       onSelected: (value) async {
                                         switch (value) {
@@ -230,7 +239,6 @@ class _AllSongsState extends State<AllSongs> {
                                                 title:
                                                     items.data![index].title);
                                             break;
-                                         
                                         }
                                       },
                                       icon: FaIcon(FontAwesomeIcons.ellipsis,
@@ -242,10 +250,11 @@ class _AllSongsState extends State<AllSongs> {
                                         const Color.fromARGB(
                                             255, 145, 145, 145)),
                                   ),
-                                   Divider(
-                                    indent:  mediaqueryHeight(0.0935, context),
+                                  Divider(
+                                    indent: mediaqueryHeight(0.0935, context),
                                     thickness: 1,
-                                    color: const Color.fromARGB(255, 103, 103, 103),
+                                    color: const Color.fromARGB(
+                                        255, 103, 103, 103),
                                   ),
                                 ],
                               );
@@ -313,8 +322,10 @@ class _AllSongsState extends State<AllSongs> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        myText("0.5x",  mediaqueryHeight(0.02, context), Colors.white),
-                        myText("2.0x",   mediaqueryHeight(0.02, context), Colors.white)
+                        myText("0.5x", mediaqueryHeight(0.02, context),
+                            Colors.white),
+                        myText("2.0x", mediaqueryHeight(0.02, context),
+                            Colors.white)
                       ],
                     )
                   ],
@@ -344,18 +355,23 @@ class _AllSongsState extends State<AllSongs> {
               height: mediaqueryHeight(0.5, context),
               child: Column(
                 children: [
-                   SizedBox(
+                  SizedBox(
                     height: mediaqueryHeight(0.023, context),
                   ),
                   GestureDetector(
                       onTap: () {
                         speedControl(context, sliderValue);
                       },
-                      child: bottomSheetItems(Icons.speed, "Playback speed",context)),
+                      child: bottomSheetItems(
+                          Icons.speed, "Playback speed", context)),
                   divider(),
                   GestureDetector(
-                      onTap: () {},
-                      child: bottomSheetItems(Icons.share, "Share",context)),
+                      onTap: () async {
+                        await Share.share(
+                          'Get Lazits music player from the Amazon Appstore. Check it out - https://www.amazon.com/dp/B0CPYR6D8W/ref=apps_sf_sta ',
+                        );
+                      },
+                      child: bottomSheetItems(Icons.share, "Share", context)),
                   divider(),
                   GestureDetector(
                     onTap: () {
@@ -363,7 +379,7 @@ class _AllSongsState extends State<AllSongs> {
                           builder: (context) => const PrivacyPolicy()));
                     },
                     child: bottomSheetItems(
-                        Icons.privacy_tip_outlined, "Privacy policy",context),
+                        Icons.privacy_tip_outlined, "Privacy policy", context),
                   ),
                   divider(),
                   GestureDetector(
@@ -371,18 +387,23 @@ class _AllSongsState extends State<AllSongs> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const TermsAndConditions()));
                     },
-                    child: bottomSheetItems(
-                        FontAwesomeIcons.clipboard, "Terms & Conditions",context),
+                    child: bottomSheetItems(FontAwesomeIcons.clipboard,
+                        "Terms & Conditions", context),
                   ),
                   divider(),
-                  bottomSheetItems(FontAwesomeIcons.star, "Rate us",context),
-                   SizedBox(
+                  GestureDetector(
+                      onTap: () {
+                        ratingAlert(context);
+                      },
+                      child: bottomSheetItems(
+                          FontAwesomeIcons.star, "Rate us", context)),
+                  SizedBox(
                     height: mediaqueryHeight(0.03, context),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 18),
                     child: Text(
-                      "Version 1.0.0",
+                      "Version 1.0.1",
                       style: TextStyle(
                           color: Colors.grey,
                           fontFamily: "FiraSans",
@@ -395,15 +416,16 @@ class _AllSongsState extends State<AllSongs> {
   }
 }
 
-Widget bottomSheetItems(IconData icon, String text,context) {
+Widget bottomSheetItems(IconData icon, String text, context) {
   return Column(
     children: [
-     SizedBox(
+      SizedBox(
         height: mediaqueryHeight(0.01, context),
       ),
       Row(
         children: [
-           Padding(padding: EdgeInsets.only(left: mediaqueryHeight(0.026, context))),
+          Padding(
+              padding: EdgeInsets.only(left: mediaqueryHeight(0.026, context))),
           Icon(
             icon,
             color: Colors.white,
@@ -421,12 +443,12 @@ Widget bottomSheetItems(IconData icon, String text,context) {
               ),
             ),
           ),
-           SizedBox(
+          SizedBox(
             width: mediaqueryHeight(0.04, context),
           )
         ],
       ),
-       SizedBox(height: mediaqueryHeight(0.009, context)),
+      SizedBox(height: mediaqueryHeight(0.009, context)),
     ],
   );
 }
@@ -437,4 +459,79 @@ divider() {
       Divider(thickness: 2, color: const Color(0xFF555555).withOpacity(0.6)),
     ],
   );
+}
+
+ratingAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (ctx2) {
+      return AlertDialog(
+        backgroundColor: greyColor2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        title: Center(
+          child: Column(
+            children: [
+              Text(
+                "RATE US",
+                style: TextStyle(
+                  fontFamily: "FiraSans",
+                  color: Colors.black,
+                  fontSize: mediaqueryWidth(0.052, context),
+                ),
+              ),
+              divider()
+            ],
+          ),
+        ),
+        // contentPadding: EdgeInsets.only(
+        //     left: mediaqueryWidth(0.05, context),
+        //     right: mediaqueryWidth(0.05, context),
+            
+        //     ),
+        titlePadding: EdgeInsets.only(top: mediaqueryHeight(0.02, context),bottom: mediaqueryHeight(0.01, context),left: mediaqueryHeight(0.04, context),right: mediaqueryHeight(0.04, context)),
+            
+        actions: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                 textAlign: TextAlign.center,  
+                "How would you rate your experience with our app ?",
+                style: TextStyle(
+                  fontFamily: "FiraSans",
+                  
+                  color: Colors.black,
+                  fontSize: mediaqueryWidth(0.048, context),
+                ),
+              ),
+              SizedBox(
+                height: mediaqueryHeight(0.013, context),
+              ),
+              RatingBar.builder(itemBuilder: (context, _) {
+              
+                return Icon(
+                  Icons.star,
+                  color: Colors.amber.shade500,
+                );
+              }, onRatingUpdate: (rating) async {
+             
+                Navigator.pop(context);
+                await launchURL();
+              },
+              
+              )
+            ],
+          )
+        ],
+      );
+    },
+  );
+}
+
+Future<void> launchURL() async {
+  // ignore: deprecated_member_use
+  if (await launch('https://www.amazon.com/dp/B0CPYR6D8W/ref=apps_sf_sta')) {
+    throw "Try Again";
+}
 }

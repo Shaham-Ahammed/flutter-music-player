@@ -16,17 +16,9 @@ Future<List<SongModel>> getSongs() async {
       orderType: OrderType.ASC_OR_SMALLER,
       uriType: UriType.EXTERNAL,
       ignoreCase: true,
-      
     );
-     
-      
-    song = song
-          .where((song) =>
-             
-              !song.data.contains("WhatsApp Audio"))
-          .toList();
- 
 
+    song = song.where((song) => !song.data.contains("WhatsApp Audio")).toList();
 
     mostPlayedUpdate(songs: song);
     return song;
@@ -65,9 +57,7 @@ Future<List<Song>> recordingsList() async {
   List<Song> records = [];
   for (int i = 0; i < allSongs.length; i++) {
     if (allSongs[i].path.contains("lazit recordings")) {
-      
-    
-    records.add(allSongs[i]);
+      records.add(allSongs[i]);
     }
   }
   return records;

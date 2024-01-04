@@ -28,6 +28,7 @@ class MusicPlayer extends StatefulWidget {
   int index;
   final bool fromFavScreen;
   final double? sliderVal;
+  bool fromRecords;
 
   MusicPlayer(
       {Key? key,
@@ -35,7 +36,8 @@ class MusicPlayer extends StatefulWidget {
       required this.index,
       required this.audioPlayer,
       this.sliderVal,
-      required this.fromFavScreen})
+      required this.fromFavScreen,
+      this.fromRecords = false})
       : super(key: key);
 
   @override
@@ -65,19 +67,16 @@ class _MusicPlayerState extends State<MusicPlayer>
     addSongToMostPlayed(widget.songModel![widget.index].songid);
     try {
       await widget.audioPlayer.setAudioSource(
-          AudioSource.uri(Uri.parse(widget.songModel![widget.index].uri),
+        AudioSource.uri(
+          Uri.parse(widget.songModel![widget.index].uri),
           tag: MediaItem(
-   
-    id: "${widget.songModel![widget.index].songid}",
-   
-    album: widget.songModel![widget.index].artist,
-    title: widget.songModel![widget.index].title,
-    artUri: Uri.parse('https://example.com/albumart.jpg'),
-  ),
-          
+            id: "${widget.songModel![widget.index].songid}",
+            album: widget.songModel![widget.index].artist,
+            title: widget.songModel![widget.index].title,
+            artUri: Uri.parse('https://example.com/albumart.jpg'),
           ),
-          
-          );
+        ),
+      );
 
       await widget.audioPlayer.seek(Duration.zero);
 
@@ -280,7 +279,10 @@ class _MusicPlayerState extends State<MusicPlayer>
                           width: MediaQuery.of(context).size.width * 0.7,
                           child: Center(
                             child: Text(
-                              widget.songModel![widget.index].artist.toString(),
+                              widget.fromRecords == false
+                                  ? widget.songModel![widget.index].artist
+                                      .toString()
+                                  : "",
                               style: TextStyle(
                                 fontFamily: "FiraSans",
                                 color: greyColor,

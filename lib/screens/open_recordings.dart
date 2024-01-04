@@ -80,6 +80,7 @@ class _OpenRecordingsState extends State<OpenRecordings> {
                                                   songModel: items.data!,
                                                   index: index,
                                                   fromFavScreen: false,
+                                                  fromRecords:true
                                                 )))
                                         .then((value) {
                                       setState(() {});
@@ -187,10 +188,7 @@ class _OpenRecordingsState extends State<OpenRecordings> {
                                     icon: FaIcon(FontAwesomeIcons.ellipsis,
                                         color: greyColor2),
                                   ),
-                                  subtitle: myText(
-                                      items.data![index].artist.toString(),
-                                      mediaqueryWidth(0.039, context),
-                                      const Color.fromARGB(255, 145, 145, 145)),
+                                 
                                 ),
                                 screenDivider(context)
                               ],
